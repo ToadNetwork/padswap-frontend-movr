@@ -1,6 +1,6 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@padswap/sdk'
 
-export const ROUTER_ADDRESS = '0x76437234D29f84D9A12820A137c6c6A719138C24'
+export const ROUTER_ADDRESS = '0x790d4b443edB9ce9A8d1aEC585edd89E51132D2c'
 
 // a list of tokens by chain
 type ChainTokenList = {
@@ -12,20 +12,6 @@ export const PAD = new Token(ChainId.MAINNET, '0xC0888d80EE0AbF84563168b3182650c
 export const DAI = new Token(ChainId.MAINNET, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin')
 export const BUSD = new Token(ChainId.MAINNET, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18, 'BUSD', 'Binance USD')
 export const USDT = new Token(ChainId.MAINNET, '0x55d398326f99059fF775485246999027B3197955', 18, 'USDT', 'Tether USD')
-export const UST = new Token(
-  ChainId.MAINNET,
-  '0x23396cF899Ca06c4472205fC903bDB4de249D6fC',
-  18,
-  'UST',
-  'Wrapped UST Token'
-)
-export const ETH = new Token(
-  ChainId.MAINNET,
-  '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
-  18,
-  'ETH',
-  'Binance-Peg Ethereum Token'
-)
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
@@ -35,7 +21,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, BUSD, USDT, UST, ETH, TOAD, PAD],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, BUSD, USDT, TOAD, PAD],
 }
 
 /**
@@ -62,7 +48,7 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
   [ChainId.MAINNET]: [
     [
       new Token(ChainId.MAINNET, '0xC0888d80EE0AbF84563168b3182650c0AdDEb6d5', 18, 'PAD', 'Lily Pad'),
-      new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'),
+      new Token(ChainId.MAINNET, '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'),
     ],
     [BUSD, USDT],
     [DAI, USDT],

@@ -11,125 +11,12 @@
   "keywords": ["pancake", "default"],
   "tokens": [
     {
-      "name": "Toad Token",
-      "symbol": "TOAD",
-      "address": "0x463e737d8f740395abf44f7aac2d9531d8d539e9",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0x463e737d8f740395abf44f7aac2d9531d8d539e9.png"
-    },
-    {
-      "name": "PAD Token",
-      "symbol": "PAD",
-      "address": "0xC0888d80EE0AbF84563168b3182650c0AdDEb6d5",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/pad.png"
-    },
-    {
-      "name": "WBNB Token",
-      "symbol": "WBNB",
-      "address": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c.png"
-
-    },
-    {
-      "name": "BUSD Token",
-      "symbol": "BUSD",
-      "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0xe9e7cea3dedca5984780bafc599bd69add087d56.png"
-    },
-    {
-      "name": "Ethereum Token",
-      "symbol": "ETH",
-      "address": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0x2170ed0880ac9a755fd29b2688956bd959f933f8.png"
-    },
-    {
-      "name": "BTCB Token",
-      "symbol": "BTCB",
-      "address": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c.png"
-    },
-    {
       "name": "USD Coin",
       "symbol": "USDC",
-      "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
-      "chainId": 56,
-      "decimals": 18,
+      "address": "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
+      "chainId": 1285,
+      "decimals": 6,
       "logoURI": "https://padswap.exchange/images/coins/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d.png"
-    },
-    {
-      "name": "Hoge.Finance",
-      "symbol": "HOGE",
-      "address": "0xa4FFfc757e8c4F24E7b209C033c123D20983Ad40",
-      "chainId": 56,
-      "decimals": 9,
-      "logoURI": "https://padswap.exchange/images/coins/0xa4FFfc757e8c4F24E7b209C033c123D20983Ad40.png"
-    },
-    {
-      "name": "PORN ROCKET",
-      "symbol": "PORNROCKET",
-      "address": "0xcf9f991b14620f5ad144eec11f9bc7bf08987622",
-      "chainId": 56,
-      "decimals": 9,
-      "logoURI": "https://padswap.exchange/images/coins/0xcf9f991b14620f5ad144eec11f9bc7bf08987622.png"
-    },
-    {
-      "name": "Lazy Finance",
-      "symbol": "LAZY",
-      "address": "0x3f3d55028207348ef3c0cF705fa1a2633858C8a9",
-      "chainId": 56,
-      "decimals": 9,
-      "logoURI": "https://padswap.exchange/images/coins/0x3f3d55028207348ef3c0cF705fa1a2633858C8a9.png"
-    },
-    {
-      "name": "JEJUDOGE BSC",
-      "symbol": "JEJUDOGE",
-      "address": "0x2020EB9E26aa49c27ebB72C174cfbab851f7ddE0",
-      "chainId": 56,
-      "decimals": 9,
-      "logoURI": "https://padswap.exchange/images/coins/0x2020EB9E26aa49c27ebB72C174cfbab851f7ddE0.png"
-    },
-    {
-      "name": "BULLISH JACKPOT",
-      "symbol": "BJT",
-      "address": "0x37f3ef4e065f3415d1b6f9284389cc9d9439f658",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0x37f3ef4e065f3415d1b6f9284389cc9d9439f658.png"
-    },
-    {
-      "name": "PARADOX NFT BSC",
-      "symbol": "PXBSC",
-      "address": "0xa4cfe5ea184a9a8bb2bb8377a378606a36ddea80",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0xa4cfe5ea184a9a8bb2bb8377a378606a36ddea80.png"
-    },
-    {
-      "name": "FUCK YOU KARENS",
-      "symbol": "FUK",
-      "address": "0xa898bbb508c04be26af3d319b7775927afcb02af",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://padswap.exchange/images/coins/0xa898bbb508c04be26af3d319b7775927afcb02af.png"
-    },
-    {
-      "name": "GALLANT",
-      "symbol": "GAL",
-      "address": "0x580655e2c6d4fc125c0b2d37b2a3e56219bf9f78",
-      "chainId": 56,
-      "decimals": 9,
-      "logoURI": "https://padswap.exchange/images/coins/0x580655e2c6d4fc125c0b2d37b2a3e56219bf9f78.png"
     }
   ]
 }

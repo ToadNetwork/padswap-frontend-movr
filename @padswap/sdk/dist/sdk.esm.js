@@ -10,14 +10,14 @@ import { keccak256, pack } from '@ethersproject/solidity';
 import { Contract } from '@ethersproject/contracts';
 import { getNetwork } from '@ethersproject/networks';
 import { getDefaultProvider } from '@ethersproject/providers';
-import IUniswapV2Pair from '@uniswap/v2-core/build/IUniswapV2Pair.json';
+import IPancakePair from '@uniswap/v2-core/build/IUniswapV2Pair.json';
 
 var _SOLIDITY_TYPE_MAXIMA;
 var ChainId;
 
 (function (ChainId) {
-  ChainId[ChainId["MAINNET"] = 56] = "MAINNET";
-  ChainId[ChainId["BSCTESTNET"] = 97] = "BSCTESTNET";
+  ChainId[ChainId["MAINNET"] = 1285] = "MAINNET";
+  ChainId[ChainId["TESTNET"] = 97] = "TESTNET";
 })(ChainId || (ChainId = {}));
 
 var TradeType;
@@ -35,8 +35,8 @@ var Rounding;
   Rounding[Rounding["ROUND_UP"] = 2] = "ROUND_UP";
 })(Rounding || (Rounding = {}));
 
-var FACTORY_ADDRESS = '0xB836017ACf10b8A7c6c6C9e99eFE0f5B0250FC45';
-var INIT_CODE_HASH = '0x71e6e31358ee16b3d9300fae77629fc40a171f4cc53183576ba7ba5fb318c931';
+var FACTORY_ADDRESS = '0x760d2Bdb232027aB3b1594405077F9a1b91C04c1';
+var INIT_CODE_HASH = '0xc5443539aede6901cfc8cbd4f358bb6c6524f2d1bd7ecd1f6ebea4d34498726d';
 var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
 
 var ZERO = /*#__PURE__*/JSBI.BigInt(0);
@@ -46,8 +46,8 @@ var THREE = /*#__PURE__*/JSBI.BigInt(3);
 var FIVE = /*#__PURE__*/JSBI.BigInt(5);
 var TEN = /*#__PURE__*/JSBI.BigInt(10);
 var _100 = /*#__PURE__*/JSBI.BigInt(100);
-var _997 = /*#__PURE__*/JSBI.BigInt(997);
-var _1000 = /*#__PURE__*/JSBI.BigInt(1000);
+var FEES_NUMERATOR = /*#__PURE__*/JSBI.BigInt(9975);
+var FEES_DENOMINATOR = /*#__PURE__*/JSBI.BigInt(10000);
 var SolidityType;
 
 (function (SolidityType) {
@@ -369,7 +369,7 @@ function Currency(decimals, symbol, name) {
  * The only instance of the base class `Currency`.
  */
 
-Currency.ETHER = /*#__PURE__*/new Currency(18, 'BNB', 'Binance');
+Currency.ETHER = /*#__PURE__*/new Currency(18, 'BNB', 'BNB');
 var ETHER = Currency.ETHER;
 
 var _WETH;
@@ -380,12 +380,13 @@ var _WETH;
 var Token = /*#__PURE__*/function (_Currency) {
   _inheritsLoose(Token, _Currency);
 
-  function Token(chainId, address, decimals, symbol, name) {
+  function Token(chainId, address, decimals, symbol, name, projectLink) {
     var _this;
 
     _this = _Currency.call(this, decimals, symbol, name) || this;
     _this.chainId = chainId;
     _this.address = validateAndParseAddress(address);
+    _this.projectLink = projectLink;
     return _this;
   }
   /**
@@ -435,7 +436,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB'), _WETH);
+var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0x663a07a2648296f1A3C02EE86A126fE1407888E5', 18, 'WMOVR', 'Wrapped MOVR', 'https://moonbeam.network/networks/moonriver/'), _WETH[ChainId.TESTNET] = /*#__PURE__*/new Token(ChainId.TESTNET, '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e', 18, 'WBNB', 'Wrapped BNB', 'https://www.binance.org'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);
@@ -758,7 +759,7 @@ var Pair = /*#__PURE__*/function () {
   function Pair(tokenAmountA, tokenAmountB) {
     var tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
     ? [tokenAmountA, tokenAmountB] : [tokenAmountB, tokenAmountA];
-    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'UNI-V2', 'Uniswap V2');
+    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'Cake-LP', 'Pancake LPs');
     this.tokenAmounts = tokenAmounts;
   }
 
@@ -818,9 +819,9 @@ var Pair = /*#__PURE__*/function () {
 
     var inputReserve = this.reserveOf(inputAmount.token);
     var outputReserve = this.reserveOf(inputAmount.token.equals(this.token0) ? this.token1 : this.token0);
-    var inputAmountWithFee = JSBI.multiply(inputAmount.raw, _997);
+    var inputAmountWithFee = JSBI.multiply(inputAmount.raw, FEES_NUMERATOR);
     var numerator = JSBI.multiply(inputAmountWithFee, outputReserve.raw);
-    var denominator = JSBI.add(JSBI.multiply(inputReserve.raw, _1000), inputAmountWithFee);
+    var denominator = JSBI.add(JSBI.multiply(inputReserve.raw, FEES_DENOMINATOR), inputAmountWithFee);
     var outputAmount = new TokenAmount(inputAmount.token.equals(this.token0) ? this.token1 : this.token0, JSBI.divide(numerator, denominator));
 
     if (JSBI.equal(outputAmount.raw, ZERO)) {
@@ -839,8 +840,8 @@ var Pair = /*#__PURE__*/function () {
 
     var outputReserve = this.reserveOf(outputAmount.token);
     var inputReserve = this.reserveOf(outputAmount.token.equals(this.token0) ? this.token1 : this.token0);
-    var numerator = JSBI.multiply(JSBI.multiply(inputReserve.raw, outputAmount.raw), _1000);
-    var denominator = JSBI.multiply(JSBI.subtract(outputReserve.raw, outputAmount.raw), _997);
+    var numerator = JSBI.multiply(JSBI.multiply(inputReserve.raw, outputAmount.raw), FEES_DENOMINATOR);
+    var denominator = JSBI.multiply(JSBI.subtract(outputReserve.raw, outputAmount.raw), FEES_NUMERATOR);
     var inputAmount = new TokenAmount(outputAmount.token.equals(this.token0) ? this.token1 : this.token0, JSBI.add(JSBI.divide(numerator, denominator), ONE));
     return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))];
   };
@@ -1369,7 +1370,7 @@ function toHex(currencyAmount) {
 
 var ZERO_HEX = '0x0';
 /**
- * Represents the Uniswap V2 Router, and has static methods for helping execute trades.
+ * Represents the Pancake Router, and has static methods for helping execute trades.
  */
 
 var Router = /*#__PURE__*/function () {
@@ -1389,14 +1390,14 @@ var Router = /*#__PURE__*/function () {
     var etherOut = trade.outputAmount.currency === ETHER; // the router does not support both ether in and out
 
     !!(etherIn && etherOut) ? process.env.NODE_ENV !== "production" ? invariant(false, 'ETHER_IN_OUT') : invariant(false) : void 0;
-    !(options.ttl > 0) ? process.env.NODE_ENV !== "production" ? invariant(false, 'TTL') : invariant(false) : void 0;
+    !(!('ttl' in options) || options.ttl > 0) ? process.env.NODE_ENV !== "production" ? invariant(false, 'TTL') : invariant(false) : void 0;
     var to = validateAndParseAddress(options.recipient);
     var amountIn = toHex(trade.maximumAmountIn(options.allowedSlippage));
     var amountOut = toHex(trade.minimumAmountOut(options.allowedSlippage));
     var path = trade.route.path.map(function (token) {
       return token.address;
     });
-    var deadline = "0x" + (Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16);
+    var deadline = 'ttl' in options ? "0x" + (Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16) : "0x" + options.deadline.toString(16);
     var useFeeOnTransfer = Boolean(options.feeOnTransfer);
     var methodName;
     var args;
@@ -1493,11 +1494,7 @@ var ERC20 = [
 	}
 ];
 
-var _TOKEN_DECIMALS_CACHE;
-var TOKEN_DECIMALS_CACHE = (_TOKEN_DECIMALS_CACHE = {}, _TOKEN_DECIMALS_CACHE[ChainId.MAINNET] = {
-  '0xE0B7927c4aF23765Cb51314A0E0521A9645F0E2A': 9 // DGD
-
-}, _TOKEN_DECIMALS_CACHE);
+var TOKEN_DECIMALS_CACHE = {};
 /**
  * Contains methods for constructing instances of pairs and tokens from on-chain data.
  */
@@ -1519,7 +1516,7 @@ var Fetcher = /*#__PURE__*/function () {
 
   Fetcher.fetchTokenData = function fetchTokenData(chainId, address, provider, symbol, name) {
     try {
-      var _TOKEN_DECIMALS_CACHE2, _TOKEN_DECIMALS_CACHE3;
+      var _TOKEN_DECIMALS_CACHE, _TOKEN_DECIMALS_CACHE2;
 
       var _temp3 = function _temp3(parsedDecimals) {
         return new Token(chainId, address, parsedDecimals, symbol, name);
@@ -1527,12 +1524,12 @@ var Fetcher = /*#__PURE__*/function () {
 
       if (provider === undefined) provider = getDefaultProvider(getNetwork(chainId));
 
-      var _temp4 = typeof ((_TOKEN_DECIMALS_CACHE2 = TOKEN_DECIMALS_CACHE) === null || _TOKEN_DECIMALS_CACHE2 === void 0 ? void 0 : (_TOKEN_DECIMALS_CACHE3 = _TOKEN_DECIMALS_CACHE2[chainId]) === null || _TOKEN_DECIMALS_CACHE3 === void 0 ? void 0 : _TOKEN_DECIMALS_CACHE3[address]) === 'number';
+      var _temp4 = typeof ((_TOKEN_DECIMALS_CACHE = TOKEN_DECIMALS_CACHE) === null || _TOKEN_DECIMALS_CACHE === void 0 ? void 0 : (_TOKEN_DECIMALS_CACHE2 = _TOKEN_DECIMALS_CACHE[chainId]) === null || _TOKEN_DECIMALS_CACHE2 === void 0 ? void 0 : _TOKEN_DECIMALS_CACHE2[address]) === 'number';
 
       return Promise.resolve(_temp4 ? _temp3(TOKEN_DECIMALS_CACHE[chainId][address]) : Promise.resolve(new Contract(address, ERC20, provider).decimals().then(function (decimals) {
-        var _TOKEN_DECIMALS_CACHE4, _extends2, _extends3;
+        var _TOKEN_DECIMALS_CACHE3, _extends2, _extends3;
 
-        TOKEN_DECIMALS_CACHE = _extends({}, TOKEN_DECIMALS_CACHE, (_extends3 = {}, _extends3[chainId] = _extends({}, (_TOKEN_DECIMALS_CACHE4 = TOKEN_DECIMALS_CACHE) === null || _TOKEN_DECIMALS_CACHE4 === void 0 ? void 0 : _TOKEN_DECIMALS_CACHE4[chainId], (_extends2 = {}, _extends2[address] = decimals, _extends2)), _extends3));
+        TOKEN_DECIMALS_CACHE = _extends({}, TOKEN_DECIMALS_CACHE, (_extends3 = {}, _extends3[chainId] = _extends({}, (_TOKEN_DECIMALS_CACHE3 = TOKEN_DECIMALS_CACHE) === null || _TOKEN_DECIMALS_CACHE3 === void 0 ? void 0 : _TOKEN_DECIMALS_CACHE3[chainId], (_extends2 = {}, _extends2[address] = decimals, _extends2)), _extends3));
         return decimals;
       })).then(_temp3));
     } catch (e) {
@@ -1552,7 +1549,7 @@ var Fetcher = /*#__PURE__*/function () {
       if (provider === undefined) provider = getDefaultProvider(getNetwork(tokenA.chainId));
       !(tokenA.chainId === tokenB.chainId) ? process.env.NODE_ENV !== "production" ? invariant(false, 'CHAIN_ID') : invariant(false) : void 0;
       var address = Pair.getAddress(tokenA, tokenB);
-      return Promise.resolve(new Contract(address, IUniswapV2Pair.abi, provider).getReserves()).then(function (_ref) {
+      return Promise.resolve(new Contract(address, IPancakePair.abi, provider).getReserves()).then(function (_ref) {
         var reserves0 = _ref[0],
             reserves1 = _ref[1];
         var balances = tokenA.sortsBefore(tokenB) ? [reserves0, reserves1] : [reserves1, reserves0];
