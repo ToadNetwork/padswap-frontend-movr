@@ -6,14 +6,19 @@ type ApiResponse = {
   }
 }
 
-const api = 'https://api.thegraph.com/subgraphs/name/toadguy/padswap-subgraph'
+const api = 'https://api.thegraph.com/subgraphs/name/toadguy/padswap-subgraph-movr'
 const query = {
   query: `
   {
-      pairs(where: {id: "0x2856add546e729425383173d4f65bb3e23e796a4"}) {
-        token1Price
-      }
-  }  
+    token(id: "0x45488c50184ce2092756ba7cdf85731fd17e6f3d") {
+      symbol
+      derivedETH
+    }
+    pair(id: "0x38185bf42e4d6d0b51db5f6c2b83064008549087") {
+      id
+      token1Price
+    }
+  } 
   `
 }
 
@@ -27,10 +32,10 @@ const useGetPriceData = () => {
           method: "POST",
           body: JSON.stringify(query)
         });
-        const response2 = await fetch('https://api.bscscan.com/api?module=stats&action=tokensupply&contractaddress=0xc0888d80ee0abf84563168b3182650c0addeb6d5&apikey=DMR2CTIEV3SYTRDRHN4PUVP43SEAV7KXHQ')
+        // const response2 = await fetch('https://api.bscscan.com/api?module=stats&action=tokensupply&contractaddress=0xc0888d80ee0abf84563168b3182650c0addeb6d5&apikey=DMR2CTIEV3SYTRDRHN4PUVP43SEAV7KXHQ')
         const res = await response.json()
-        const res2 = await response2.json()
-        setData({info: {price: `${res.data.pairs[0].token1Price*1000}`, mcap: `${Number(res2.result)/1e18/1000*Number(res.data.pairs[0].token1Price)}`}})
+        // const res2 = await response2.json()
+        setData({info: {price: `${Number(res.data.data.token.derivedETH) * Number(res.data.data.pair.token1Price)}`, mcap: `${Number(res.data.data.token.derivedETH) * Number(res.data.data.pair.token1Price)*20*1e9}`}})
       } catch (error) {
         console.error('Unable to fetch price data:', error)
       }
