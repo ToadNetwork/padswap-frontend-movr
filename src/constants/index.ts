@@ -7,11 +7,14 @@ type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
 
-export const TOAD = new Token(ChainId.MAINNET, '0x463e737d8f740395abf44f7aac2d9531d8d539e9', 18, 'TOAD', 'Toad Token')
-export const PAD = new Token(ChainId.MAINNET, '0xC0888d80EE0AbF84563168b3182650c0AdDEb6d5', 18, 'PAD', 'Pad Token')
-export const DAI = new Token(ChainId.MAINNET, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin')
-export const BUSD = new Token(ChainId.MAINNET, '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56', 18, 'BUSD', 'Binance USD')
-export const USDT = new Token(ChainId.MAINNET, '0x55d398326f99059fF775485246999027B3197955', 18, 'USDT', 'Tether USD')
+export const USDC = new Token(ChainId.MAINNET, '0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d', 6, 'USDC', 'USD Coin')
+export const PAD = new Token(ChainId.MAINNET, '0x45488c50184ce2092756ba7cdf85731fd17e6f3d', 18, 'PAD', 'Movr Pad')
+export const MOVR = new Token(ChainId.MAINNET, '0x663a07a2648296f1a3c02ee86a126fe1407888e5', 18, 'MOVR', 'MoonRiver')
+export const BUSD = new Token(ChainId.MAINNET, '0x5d9ab5522c64e1f6ef5e3627eccc093f56167818', 18, 'BUSD', 'Binance USD')
+export const BNB = new Token(ChainId.MAINNET, '0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c', 18, 'BNB', 'Binance Coin')
+export const DAI = new Token(ChainId.MAINNET, '0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844', 18, 'DAI', 'DAI Stable Coin')
+export const USDT = new Token(ChainId.MAINNET, '0xb44a9b6905af7c801311e8f4e76932ee959c663c', 18, 'USDT', 'Tether USD')
+export const MIM = new Token(ChainId.MAINNET, '0x0cae51e1032e8461f4806e26332c030e34de3adb', 18, 'MIM', 'Magic Internet Money')
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
@@ -21,7 +24,7 @@ const WETH_ONLY: ChainTokenList = {
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, BUSD, USDT, TOAD, PAD],
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, PAD, MOVR, BUSD, BNB, DAI, USDT, MIM],
 }
 
 /**

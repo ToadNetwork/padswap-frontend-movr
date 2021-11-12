@@ -31,7 +31,7 @@
       "symbol": "USDT",
       "address": "0xB44a9B6905aF7c801311e8F4E76932ee959c663C",
       "chainId": 1285,
-      "decimals": 18,
+      "decimals": 6,
       "logoURI": "https://padswap.exchange/images/coins/0xB44a9B6905aF7c801311e8F4E76932ee959c663C.png"
     },
     {
@@ -57,6 +57,14 @@
       "chainId": 1285,
       "decimals": 18,
       "logoURI": "https://padswap.exchange/images/coins/0x45488C50184Ce2092756ba7CdF85731fD17e6f3d.png"
+    },
+    {
+      "name": "Binance Coin",
+      "symbol": "BNB",
+      "address": "0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c",
+      "chainId": 1285,
+      "decimals": 18,
+      "logoURI": "https://padswap.exchange/images/coins/0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c.png"
     }
   ]
 }

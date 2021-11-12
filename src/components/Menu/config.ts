@@ -2,6 +2,21 @@ import { MenuEntry } from '@padswap/uikit'
 
 const config: MenuEntry[] = [
   {
+    label: "Network",
+    icon: "ToadLogo",
+    items: [
+      {
+        label: "BSC",
+        href: "https://padswap.exchange",
+      },
+      {
+        label: "MoonRiver",
+        href: "https://movr.padswap.exchange",
+      },
+    ],
+    // calloutClass: "rainbow",
+  },
+  {
     label: 'Trade',
     icon: 'TradeIcon',
     initialOpenState: true,
@@ -19,27 +34,27 @@ const config: MenuEntry[] = [
   {
     label: "LaunchPad",
     icon: "VaultIcon",
-    href: "https://dapps.padswap.exchange/launchpad",
+    href: "https://movr-dapps.padswap.exchange/launchpad",
   },
   {
     label: "Vault",
     icon: "VaultIcon",
-    href: "https://dapps.padswap.exchange/vault",
+    href: "https://movr-dapps.padswap.exchange/vault",
   },
   {
     label: 'Liquidity Farm',
     icon: 'PoolIcon',
-    href: 'https://dapps.padswap.exchange/lpfarms',
+    href: 'https://movr-dapps.padswap.exchange/lpfarms',
   },
   {
     label: 'Farms',
     icon: 'ChartIcon',
-    href: 'https://dapps.padswap.exchange',
+    href: 'https://movr-dapps.padswap.exchange',
   },
   {
     label: 'Stats',
     icon: 'ChartIcon',
-    href: 'https://info.padswap.exchange',
+    href: 'https://movr-info.padswap.exchange',
   },
   {
     label: "TOAD",
