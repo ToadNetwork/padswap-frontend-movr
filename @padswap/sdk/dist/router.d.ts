@@ -22,12 +22,19 @@ export interface TradeOptions {
      */
     feeOnTransfer?: boolean;
 }
+export interface TradeOptionsDeadline extends Omit<TradeOptions, 'ttl'> {
+    /**
+     * When the transaction expires.
+     * This is an atlernate to specifying the ttl, for when you do not want to use local time.
+     */
+    deadline: number;
+}
 /**
- * The parameters to use in the call to the Uniswap V2 Router to execute a trade.
+ * The parameters to use in the call to the Pancake Router to execute a trade.
  */
 export interface SwapParameters {
     /**
-     * The method to call on the Uniswap V2 Router.
+     * The method to call on the Pancake Router.
      */
     methodName: string;
     /**
@@ -40,7 +47,7 @@ export interface SwapParameters {
     value: string;
 }
 /**
- * Represents the Uniswap V2 Router, and has static methods for helping execute trades.
+ * Represents the Pancake Router, and has static methods for helping execute trades.
  */
 export declare abstract class Router {
     /**
@@ -52,5 +59,5 @@ export declare abstract class Router {
      * @param trade to produce call parameters for
      * @param options options for the call parameters
      */
-    static swapCallParameters(trade: Trade, options: TradeOptions): SwapParameters;
+    static swapCallParameters(trade: Trade, options: TradeOptions | TradeOptionsDeadline): SwapParameters;
 }
