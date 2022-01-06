@@ -22,7 +22,7 @@ function Nav({ activeIndex = 0 }: { activeIndex?: number }) {
         <ButtonMenuItem
           id="pool-nav-link"
           as="a"
-          href="https://movr.anyswap.exchange/"
+          href="https://movr-dapps.padswap.exchange/"
           target="_blank"
           rel="noreferrer noopener"
         >

@@ -65,6 +65,38 @@
       "chainId": 1285,
       "decimals": 18,
       "logoURI": "https://padswap.exchange/images/coins/0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c.png"
+    },
+    {
+      "name": "Toad Network",
+      "symbol": "TOAD",
+      "address": "0x165DBb08de0476271714952C3C1F068693bd60D7",
+      "chainId": 1285,
+      "decimals": 18,
+      "logoURI": "https://padswap.exchange/images/coins/0x165DBb08de0476271714952C3C1F068693bd60D7.png"
+    },
+    {
+      "name": "River Doge",
+      "symbol": "RIVERDOGE",
+      "address": "0x5D4360f1Be94bD6f182F09cFE5EF9832e65EB1ac",
+      "chainId": 1285,
+      "decimals": 18,
+      "logoURI": "https://padswap.exchange/images/coins/0x5D4360f1Be94bD6f182F09cFE5EF9832e65EB1ac.png"
+    },
+    {
+      "name": "FRAX",
+      "symbol": "FRAX",
+      "address": "0x1A93B23281CC1CDE4C4741353F3064709A16197d",
+      "chainId": 1285,
+      "decimals": 18,
+      "logoURI": "https://padswap.exchange/images/coins/0x1A93B23281CC1CDE4C4741353F3064709A16197d.png"
+    },
+    {
+      "name": "ROME DAO",
+      "symbol": "ROME",
+      "address": "0x4a436073552044D5f2f49B176853ad3Ad473d9d6",
+      "chainId": 1285,
+      "decimals": 9,
+      "logoURI": "https://padswap.exchange/images/coins/0x4a436073552044D5f2f49B176853ad3Ad473d9d6.png"
     }
   ]
 }
